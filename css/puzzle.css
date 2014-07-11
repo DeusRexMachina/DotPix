@@ -1,0 +1,41 @@
+body{
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+#puzzArea{
+	margin: 10px;
+}
+
+.puzzle td{
+	width: 35px;
+	height: 35px;
+	text-align: center;
+	vertical-align: middle;
+	border: 1px solid black;
+}
+
+.puzzle td.empty{
+	border: 0px;
+}
+
+.puzzle td.selected{
+	background-color: #646464;
+}
+
+.puzzle td.unselected{
+	background-color: #ffffff;
+}
+
+.puzzle td.invalid{
+	background-color: #ffffff;
+}
+
+.puzzle td.zoomout{
+	width: 15px;
+	height: 15px;
+}
+
+.puzzle td.zoomout.invalid span{
+	display: none;
+}
