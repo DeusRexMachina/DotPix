@@ -11,9 +11,6 @@ var puzzWidth = 5;
 var puzzHeight = 5;
 
 $(document).ready(function(){
-	refreshCreateTableListeners();
-	refreshCreateBtnListeners();
-
 	$(".navPg").click(function(e){
 		$(".active").removeClass("active");
 		$(this).addClass("active");
@@ -68,21 +65,6 @@ function refreshCreateTableListeners(){
 }
 
 function refreshCreateBtnListeners(){
-	$("#dim-submit").click(function(e){
-		e.preventDefault();
-		$("#puzzArea").html('');
-		var newPuzzle = "<tbody>";
-		for(var row = 0; row < $("#height").val(); row++){
-			newPuzzle += "<tr>";
-			for(var col = 0; col < $("#width").val(); col++){
-				newPuzzle += "<td class='unselected'></td>";
-			}
-			newPuzzle += "</tr>";
-		}
-		$("#puzzArea").html(newPuzzle + "</tbody>");
-		refreshCreateTableListeners();
-	});
-
 	$("#zoomout").click(function(e){
 		if($("#puzzArea td").hasClass("zoomout")){
 			$("#puzzArea td").removeClass("zoomout");
@@ -141,29 +123,6 @@ function refreshCreateBtnListeners(){
 			}
 			colArr.push(tempClueArr);
 		}
-	});
-	
-	$("#save").click(function(e){
-		var puzzArr = new Array();
-		var puzzle = document.getElementById('puzzArea');
-		toInvalid($("#puzzArea td.unselected"));
-		for(var row = 0; row < $("#height").val(); row++){
-			var tempRow = new Array();
-			for(var col = 0; col < $("#width").val(); col++){
-				var cell = puzzle.rows[row].cells[col].className;
-				if(cell.indexOf("selected") > -1){
-					tempRow.push(SELECTED);
-				}else{
-					tempRow.push(UNSELECTED);
-				}
-			}
-			puzzArr.push(tempRow);
-		}
-		var puzzData = {
-			id: 1,
-			data: puzzArr
-		};
-		console.log(JSON.stringify(puzzData));
 	});
 
 	$("#clear").click(function(e){

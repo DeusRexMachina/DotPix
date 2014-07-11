@@ -1,28 +1,35 @@
 <div class="page-header">
 	<h1>Create New Puzzle</h1>
 </div>
-<form role="form" class="form-horizontal form-dim" id="dimform">
+
+<form role="form" name="dimForm" class="form-horizontal form-dim" ng-submit="resizePuzzle()" novalidate>
 	<div class="form-group">
 		<label for"height" class="control-label col-md-1">Height</label>
-		<div class="col-md-1"><input class="form-control" id="height" type="number" value=5 min=5 value=5/></div>
+		<div class="col-md-1"><input class="form-control" name="height" type="number" ng-model="height" min="5" max="30" required /></div>
+		<p ng-show="dimForm.height.$invalid" class="help-block">Invalid height(Minimum 5, Maximum 30)</p>
 	</div>
 	<div class="form-group">
 		<label for="width" class="control-label col-md-1">Width</label>
-		<div class="col-md-1"><input class="form-control" id="width" type="number" value=5 min=5 value=5/></div>
+		<div class="col-md-1"><input class="form-control" name="width" type="number" ng-model="width" min="5" max="30" required/></div>
+		<p ng-show="dimForm.width.$invalid" class="help-block">Invalid width(Minimum 5, Maximum 30)</p>
 	</div>
 	<div class="form-group">
 		<div class="col-md-11 col-md-offset-1">
-			<button id="dim-submit" class="btn btn-default">Resize</button>
+			<button type"submit" class="btn btn-default" ng-disabled="dimForm.$invalid">Resize</button>
 		</div>
 	</div>
 </form>
-<hr></hr>
-<p>
+
+<hr></hr><p>
 <div class="btn-group">
-<button id="zoomout" class="btn btn-primary">Zoom Out</button>
-<button id="save" class="btn btn-success">Save</button>
-<button id="undo" class="btn btn-warning">Undo</button>
-<button id="clear" class="btn btn-danger">Clear</button>
+	<button id="zoomout" class="btn btn-primary">Zoom Out</button>
+	<button id="save" class="btn btn-success" ng-click="saveNewPuzzle()">Save</button>
+	<button id="undo" class="btn btn-warning">Undo</button>
+	<button id="clear" class="btn btn-danger">Clear</button>
+</div><p>
+<div class="input-group">
+	<span class="input-group-addon">Puzzle Name</span>
+	<input type="text" class="form-control" ng-model="newPuzzleName">
 </div>
 
 <table class="puzzle" id="puzzArea">
