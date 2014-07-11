@@ -17,7 +17,7 @@ $(document).ready(function(){
 	});
 });
 
-function refreshCreateTableListeners(){
+function refreshTableListeners(){
 	$("#puzzArea td").mousedown(function(e){
 		var cell = $(this);
 		mousedown = true;
@@ -79,50 +79,6 @@ function refreshCreateBtnListeners(){
 		var puzzle = document.getElementById('puzzArea');
 		//convert unselected to invalid due to selected detection method
 		toInvalid($("#puzzArea td.unselected"));
-		//calcualte row clues
-		for(var row = 0; row < $("#height").val(); row++){
-			var tempClueArr = new Array();
-			var tempClue = 0;
-			for(var col = 0; col < $("#width").val(); col++){
-				var cell = puzzle.rows[row].cells[col].className;
-				if(cell.indexOf("selected") > -1){
-					tempClue++;
-				}
-				if(cell.indexOf("invalid") > -1 || cell.indexOf("unselected") > -1){
-					if(tempClue != 0){
-						tempClueArr.push(tempClue);
-						tempClue = 0;
-					}		
-				}
-				if(col == $("#width").val() - 1  && tempClue != 0){
-					tempClueArr.push(tempClue);
-					tempClue = 0;
-				}
-			}
-			rowArr.push(tempClueArr);
-		}
-		//calcuate column clues
-		for(var col = 0; col < $("#width").val(); col++){
-			var tempClueArr = new Array();
-			var tempClue = 0;
-			for(var row = 0; row < $("#height").val(); row++){
-				var cell = puzzle.rows[row].cells[col].className;
-				if(cell.indexOf("selected") > -1){
-					tempClue++;
-				}
-				if(cell.indexOf("invalid") > -1 || cell.indexOf("unselected") > -1){
-					if(tempClue != 0){
-						tempClueArr.push(tempClue);
-						tempClue = 0;
-					}		
-				}
-				if(row == $("#height").val() - 1 && tempClue != 0){
-					tempClueArr.push(tempClue);
-					tempClue = 0;
-				}
-			}
-			colArr.push(tempClueArr);
-		}
 	});
 
 	$("#clear").click(function(e){

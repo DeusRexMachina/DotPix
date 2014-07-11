@@ -1,3 +1,15 @@
 <div class="page-header">
 	<h1>Play Puzzle</h1>
 </div>
+<div ng-show="puzzleId === undefined">
+	Select a puzzle from the list below.
+	<div class="table table-striped puzzleList" ng-grid="gridOptions">
+	</div>
+	<a ng-href="#/play/{{gridOptions.selectedItems[0].id}}">
+		<button class="btn btn-success pull-right" ng-disabled="gridOptions.selectedItems.length <= 0">Load</button>
+	</a>
+</div>
+<div>
+	<table class="puzzle" id="puzzArea">
+	</table>
+</div>

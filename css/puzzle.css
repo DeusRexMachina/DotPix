@@ -3,8 +3,14 @@ body{
 	padding-bottom: 30px;
 }
 
+.puzzleList{
+	height: 200px;
+}
+
 #puzzArea{
 	margin: 10px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .puzzle td{
@@ -15,8 +21,32 @@ body{
 	border: 1px solid black;
 }
 
+.puzzle td:nth-child(5n+5){
+	border-right-width: 2px;
+	border-right-color: #398eb5;
+}
+
+.puzzle tr.pcell:nth-child(5n+5) td{
+	border-bottom-width: 2px;
+	border-bottom-color: #398eb5;
+}
+
+.puzzle tr.pcell:last-child td{
+	border-bottom-width: 1px;
+	border-bottom-color: black;
+}
+
+.puzzle td:last-child{
+	border-right-width: 1px;
+	border-right-color: black;
+}
+
 .puzzle td.empty{
 	border: 0px;
+}
+
+.puzzle td.clue{
+	border-color: blue;
 }
 
 .puzzle td.selected{
