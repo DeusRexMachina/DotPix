@@ -18,7 +18,7 @@ $(document).ready(function(){
 });
 
 function refreshTableListeners(){
-	$("#puzzArea td").mousedown(function(e){
+	$("#puzzArea td.pcell").mousedown(function(e){
 		var cell = $(this);
 		mousedown = true;
 		if(cell.hasClass("selected")){
@@ -45,7 +45,7 @@ function refreshTableListeners(){
 		mousedown = false;
 		return false;
 	});
-	$("#puzzArea td").mouseover(function(e){
+	$("#puzzArea td.pcell").mouseover(function(e){
 		var cell = $(this);
 		if(mousedown){
 			if(cellType == INVALID){

@@ -159,6 +159,16 @@ angularApp.controller('playController', function($scope, $http, $location, $rout
 					newPuzzle += "</tr>";
 				}
 				$("#puzzArea").html(newPuzzle + "</tbody>");
+
+				$(".puzzle td.pcell:nth-of-type(5n+" + maxWbox + "):not(:last-child)").css({
+					'border-right-width': '2px',
+					'border-right-color': '#398eb5'
+				});
+				$(".puzzle tr:nth-child(5n+" + maxHbox + "):not(:last) td.pcell").css({
+					'border-bottom-width': '2px',
+					'border-bottom-color': '#398eb5'
+				});
+
 				refreshTableListeners();
 			}else{
 				alert("Puzzle not found!");

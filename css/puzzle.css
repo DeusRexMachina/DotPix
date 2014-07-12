@@ -21,51 +21,34 @@ body{
 	border: 1px solid black;
 }
 
-.puzzle td:nth-child(5n+5){
-	border-right-width: 2px;
-	border-right-color: #398eb5;
-}
-
-.puzzle tr.pcell:nth-child(5n+5) td{
-	border-bottom-width: 2px;
-	border-bottom-color: #398eb5;
-}
-
-.puzzle tr.pcell:last-child td{
-	border-bottom-width: 1px;
-	border-bottom-color: black;
-}
-
-.puzzle td:last-child{
-	border-right-width: 1px;
-	border-right-color: black;
-}
-
+/*Non-puzzle and non-clue area*/
 .puzzle td.empty{
 	border: 0px;
 }
 
+/*Clue area*/
 .puzzle td.clue{
 	border-color: blue;
 }
 
-.puzzle td.selected{
+/*Styling for puzzle area*/
+.puzzle td.pcell.selected{
 	background-color: #646464;
 }
 
-.puzzle td.unselected{
+.puzzle td.pcell.unselected{
 	background-color: #ffffff;
 }
 
-.puzzle td.invalid{
+.puzzle td.pcell.invalid{
 	background-color: #ffffff;
 }
 
-.puzzle td.zoomout{
+.puzzle td.pcell.zoomout{
 	width: 15px;
 	height: 15px;
 }
 
-.puzzle td.zoomout.invalid span{
+.puzzle td.pcell.zoomout.invalid span{
 	display: none;
 }
