@@ -11,3 +11,9 @@
 </div>
 <table class="puzzle" id="puzzArea">
 </table>
+<hr></hr><p>
+<div class="btn-group" ng-show="puzzleId != undefined">
+	<button ng-click="checkPuzzle()" class="btn btn-success">Check Answer</button>
+	<button ng-click="revealPuzzle()" class="btn btn-warning">Reveal Solution</button>
+	<button ng-click="clearPuzzle()" class="btn btn-danger">Clear</button>
+</div>

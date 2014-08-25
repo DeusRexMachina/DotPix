@@ -33,13 +33,12 @@ angularApp.controller('mainController', function($scope, $http){
 			$("#puzzArea").html(newPuzzle + "</tbody>");
 			refreshTableListeners();
 		}
-	}
+	};
 
 	//Save new puzzle to database
 	$scope.saveNewPuzzle = function(){
 		var puzzArr = new Array();
 		var puzzle = document.getElementById('puzzArea');
-		toInvalid($("#puzzArea td.unselected"));
 		//transcribe table into 2d array
 		for(var row = 0; row < $scope.height; row++){
 			var tempRow = new Array();
@@ -68,5 +67,5 @@ angularApp.controller('mainController', function($scope, $http){
 		{
 			alert("There was an error saving your puzzle. Please try again later.");
 		});
-	}
+	};
 });

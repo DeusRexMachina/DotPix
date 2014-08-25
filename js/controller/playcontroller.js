@@ -34,7 +34,7 @@ angularApp.controller('playController', function($scope, $http, $location, $rout
 				$scope.puzzleData = data.data;
 
 				//Calculate row clues
-				var wClues = new Array();
+				$scope.wClues = new Array();
 				for(var row = 0; row < $scope.puzzleHeight; row++){
 					var tempRow = new Array();
 					var tempClue = 0;
@@ -52,10 +52,10 @@ angularApp.controller('playController', function($scope, $http, $location, $rout
 							tempRow.push(tempClue);
 						}
 					}
-					wClues.push(tempRow);
+					$scope.wClues.push(tempRow);
 				}
 				//Calculate column clues
-				var hClues = new Array();
+				$scope.hClues = new Array();
 				for(var col = 0; col < $scope.puzzleWidth; col++){
 					var tempCol = new Array();
 					var tempClue = 0;
@@ -73,11 +73,11 @@ angularApp.controller('playController', function($scope, $http, $location, $rout
 							tempCol.push(tempClue);
 						}
 					}
-					hClues.push(tempCol);
+					$scope.hClues.push(tempCol);
 				}
 				//Determine dimensions of puzzle table with attached clues
-				var maxHbox = maxLength(hClues);
-				var maxWbox = maxLength(wClues);
+				var maxHbox = maxLength($scope.hClues);
+				var maxWbox = maxLength($scope.wClues);
 				var totalHeight = $scope.puzzleHeight + maxHbox;
 				var totalWidth = $scope.puzzleWidth + maxWbox;
 
@@ -94,22 +94,26 @@ angularApp.controller('playController', function($scope, $http, $location, $rout
 							if(row < maxHbox || col < maxWbox){
 								if(row >= maxHbox){
 									//Row Clues
-									if(wClues[row - maxHbox][col] != -1){
-										newPuzzle += "<td class='clue'>" + wClues[row - maxHbox][col] + "</td>";
+									if($scope.wClues[row - maxHbox][col] != -1){
+										newPuzzle += "<td class='clue'>" + $scope.wClues[row - maxHbox][col] + "</td>";
 									}else{
 										newPuzzle += "<td class='clue'></td>";
 									}
 								}else{
 									//Column Clues
-									if(hClues[col - maxWbox][row] != -1){
-										newPuzzle += "<td class='clue'>" + hClues[col - maxWbox][row] + "</td>";
+									if($scope.hClues[col - maxWbox][row] != -1){
+										newPuzzle += "<td class='clue'>" + $scope.hClues[col - maxWbox][row] + "</td>";
 									}else{
 										newPuzzle += "<td class='clue'></td>";
 									}
 								}
 							}else{
-								//Interactive area
-								newPuzzle += "<td class='pcell unselected'></td>";
+								//Interactive area, id indicates row and column position
+								var rNum = row - maxHbox
+								var rName = "r" + rNum;
+								var cNum = col - maxWbox;
+								var cName = "c" + cNum;
+								newPuzzle += "<td class='pcell unselected' id='" + rName + cName + "''></td>";
 							}
 						}
 					}
@@ -146,5 +150,47 @@ angularApp.controller('playController', function($scope, $http, $location, $rout
 			{field: "name", displayName: "Name"},
 			{field: "dimensions", displayName: "Dimensions (HxW)", width: 150}],
 		selectedItems: []
+	};
+
+	//Button Functions
+	$scope.checkPuzzle = function(){
+		var incorrect = false;
+		for(var row = 0; row < $scope.puzzleData.length; row++){
+			for(var col = 0; col < $scope.puzzleData[row].length; col++){
+				var cellId = "#r" + row + "c" + col;
+				var	currCell = $(cellId);
+				if(($scope.puzzleData[row][col] == UNSELECTED && currCell.hasClass("selected")) ||
+					($scope.puzzleData[row][col] == SELECTED && !currCell.hasClass("selected"))){
+					incorrect = true;
+					break;
+				}
+			}
+			if(incorrect){
+				break;
+			}
+		}
+		if(incorrect){
+			alert("Incorrect! Try again.");
+		}
+	};
+
+	$scope.revealPuzzle = function(){
+		for(var row = 0; row < $scope.puzzleData.length; row++){
+			for(var col = 0; col < $scope.puzzleData[row].length; col++){
+				var cellId = "#r" + row + "c" + col;
+				var	currCell = $(cellId);
+				if($scope.puzzleData[row][col] == SELECTED){
+					currCell.removeClass("unselected invalid");
+					currCell.addClass("selected");
+				}else{
+					currCell.removeClass("selected invalid");
+					currCell.addClass("unselected");
+				}
+			}
+		}
+	};
+
+	$scope.clearPuzzle = function(){
+		toUnselected($("#puzzArea td.pcell"));
 	};
 });
